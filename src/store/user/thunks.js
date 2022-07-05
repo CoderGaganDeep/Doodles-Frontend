@@ -8,6 +8,7 @@ import { loginSuccess, logOut, tokenStillValid } from "./slice";
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
+    console.log(name, email, password);
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, {
         name,
@@ -22,7 +23,8 @@ export const signUp = (name, email, password) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        console.log(error.response);
+        // console.log(error.response.data.message);
         dispatch(
           setMessage({
             variant: "danger",
