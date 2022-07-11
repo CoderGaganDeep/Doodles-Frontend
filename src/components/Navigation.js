@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/slice";
+import ParentsHomePage from "../pages/ParentsHomePage";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
@@ -22,13 +23,24 @@ export const Navigation = () => {
         <span />
       </Hamburger>
       <Menu open={open}>
+        <MenuLink href="/leaflet">About Us</MenuLink>
+        <MenuLink href="/leaflet">Our Services</MenuLink>
+        <MenuLink href="/styled">Our Teachers</MenuLink>
         {token ? (
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         ) : (
           <MenuLink href="/login">Login</MenuLink>
         )}
-        <MenuLink href="/leaflet">Empty 1</MenuLink>
-        <MenuLink href="/styled">Empty 2</MenuLink>
+        {token ? (
+          <MenuLink href="/parents">Parents</MenuLink>
+        ) : (
+          <MenuLink href="/login"></MenuLink>
+        )}
+        {token ? (
+          <MenuLink href="/parents">Teachers</MenuLink>
+        ) : (
+          <MenuLink href="/login"></MenuLink>
+        )}
       </Menu>
     </Nav>
   );

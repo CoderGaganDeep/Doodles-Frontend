@@ -2,15 +2,18 @@
 // import { Link } from "react-router-dom";
 // import { LinkWord } from "../styled";
 import styled from "styled-components";
+import "../Homepage/styles.scss";
 
 export const Homepage = () => {
   return (
     <Container>
-      <img
-        src="https://kids.cmsmasters.net/wp-content/uploads/2016/07/slide2-1.jpg"
-        alt=""
-        width={1300}
-      ></img>
+      <div className="Banner">
+        <img
+          src="https://kids.cmsmasters.net/wp-content/uploads/2016/07/slide2-1.jpg"
+          alt=""
+          width={1300}
+        ></img>
+      </div>
       <h2>Why Us</h2>
       <ul>
         <li>Building communication skills</li>
@@ -100,8 +103,31 @@ export const Homepage = () => {
         <strong> Doodles</strong>- a place where children could get nurturing
         and care in September 2017.
       </p>
-      <h2>What Parents say</h2>
-      <p>Reviews</p>
+      <h2>What Parents say about Us</h2>
+      <p>
+        It's mixed feelings that my child will not be in doodles anymore. I just
+        want to say thank you for an amazing year full of happiness, colors,
+        arts, fun, stories, wonderful outings, and awesome get-togethers! Kriwin
+        had learned a lot and groomed well. He will definitely miss all his
+        little friends. All the best to each one of them😊 I as a parent enjoyed
+        the same as Kriwin.We both will miss you both so much. Keep up the good
+        work! and my wishes for you people to continue for many more years of
+        shaping wonderful kids on your way😊{" "}
+      </p>
+      <p> Kalai - Parent of Kriwin </p>
+      <p>
+        Thank you for all the extra miles that you went for imparting good
+        education to Deepanshi. She is going to miss everything. Wish she could
+        be here longer. Keep on your good wishes and blessings with her. Doodles
+        is the best Play School!!
+      </p>
+      <p> Sikata and Sandeep- Parents of Deepanshi</p>
+      <p>
+        {" "}
+        Thank youDoodles. It has been so much fun. We will think about &
+        treasure everything you have done today, tomorrow & always.{" "}
+      </p>
+      <p>Priyanka and Shripad- Parents of Shriyaan</p>
     </Container>
   );
 };

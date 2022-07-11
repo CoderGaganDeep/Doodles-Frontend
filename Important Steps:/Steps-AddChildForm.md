@@ -1,4 +1,4 @@
-### A -- To add new Child to Child Table
+### To add new Child to Child Table from a component which is form to parents home page
 
 ## 1. Create Router file in Backend Named:childRouter
 
@@ -220,3 +220,19 @@ return (
 }
 
 export default App;
+
+## 6. to update sotre index.js
+
+import { configureStore } from "@reduxjs/toolkit";
+
+import appStateReducer from "./appState/slice";
+import userReducer from "./user/slice";
+import childReducer from "./child/slice";
+
+export default configureStore({
+reducer: {
+appState: appStateReducer,
+user: userReducer,
+child: childReducer,
+},
+});
