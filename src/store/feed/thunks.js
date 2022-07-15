@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { setallFeed, newFeedSucess } from "./slice";
+import { setallFeed, newFeedSucess, myChildFeed } from "./slice";
 
 // 1. Write a thunk to get all children
 export const getallFeed = () => async (dispatch, getState) => {
@@ -31,3 +31,18 @@ export const setNewFeed =
       console.log("Thunk newFeedSucess: ", error.message);
     }
   };
+
+// 1. Write a thunk to get feed from my children
+export const getMyChildFeed = () => async (dispatch, getState) => {
+  try {
+    const token = getState().user.token;
+    const response = await axios.get(`${apiUrl}/feed/myChild`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch(myChildFeed(response.data));
+    console.log(response.data);
+  } catch (error) {
+    console.log("error from myChildFeed thunk: ", error.message);
+  }
+};

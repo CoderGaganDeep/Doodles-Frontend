@@ -1,45 +1,51 @@
 import AddChildForm from "../../components/AddChildForm";
-import { AllFeed } from "../../components/AllFeed";
+import { MyChildFeed } from "../../components/MyChildFeed";
 import AddFeedForm from "../../components/AddFeed";
 import { React, useEffect } from "react";
-import { getallFeed } from "../../store/feed/thunks";
-import { selectorAllFeeds } from "../../store/feed/selector";
+import { getMyChildFeed } from "../../store/feed/thunks";
+import { selectorMyChildFeed } from "../../store/feed/selector";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ParentsHomePage() {
   const dispatch = useDispatch();
-  const feeds = useSelector(selectorAllFeeds);
+  // const feeds = useSelector(selectorAllFeeds);
+  const myFeeds = useSelector(selectorMyChildFeed);
+  console.log("my feed", myFeeds);
 
   useEffect(() => {
-    dispatch(getallFeed());
+    dispatch(getMyChildFeed());
   }, [dispatch]);
 
-  if (!feeds)
+  if (!myFeeds)
     return (
       <div>
         <h3>Loading...</h3>
       </div>
     );
+  console.log(myFeeds, "page");
   return (
     <>
       <AddChildForm />
-      <AddFeedForm />
+
       <h1 style={{ justifyContent: "center", textAlign: "center" }}>
         My Child
       </h1>
-      {feeds.map((f) => {
+      {myFeeds?.children?.map((f, index) => {
         return (
-          <AllFeed
-            key={f.id}
-            id={f.id}
-            feed={f.feed}
-            imageUrl={f.imageUrl}
-            createdAt={f.createdAt}
-            updatedAt={f.updatedAt}
-            childId={f.childId}
-            teacherId={f.teacherId}
-            showLink={true}
-          />
+          <div style={{ display: "flex", direction: "column" }}>
+            <MyChildFeed
+              key={f.id}
+              name={f.name}
+              feed={f.feeds}
+              avatar={f.avatar}
+              imageUrl={f.imageUrl}
+              createdAt={f.createdAt}
+              updatedAt={f.updatedAt}
+              childId={f.childId}
+              teacherId={f.teacherId}
+              showLink={true}
+            />
+          </div>
         );
       })}
     </>

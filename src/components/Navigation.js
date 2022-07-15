@@ -37,7 +37,7 @@ export const Navigation = () => {
           <MenuLink href="/login"></MenuLink>
         )}
         {token ? (
-          <MenuLink href="/parents">Teachers</MenuLink>
+          <MenuLink href="/teachers">Teachers</MenuLink>
         ) : (
           <MenuLink href="/login"></MenuLink>
         )}
