@@ -33,7 +33,9 @@ export const Homepage = () => {
       </div>
 
       <div className="aboutus">
-        <h2 className="chewy">A Warm Welcome</h2>
+        <h2 className="chewy" id="welcome">
+          A Warm Welcome
+        </h2>
         <p className="lato">
           Doodles is a private Pre School serving children between the age group
           of 2.4 to 6 years. The management of Doodles feels that children need
@@ -63,7 +65,9 @@ export const Homepage = () => {
       </div>
       <div className="programa">
         <div>
-          <h2 className="chewy">Our Programs</h2>
+          <h2 className="chewy" id="about-us">
+            Our Programs
+          </h2>
 
           <div class="row">
             <div class="column">
@@ -154,7 +158,7 @@ export const Homepage = () => {
             ></img>
           </p>
 
-          <p className="lato">
+          <p className="lato" id="teacher">
             <h3 className="teacher-heading">Meet Our Teacher</h3>
             <strong>
               {" "}

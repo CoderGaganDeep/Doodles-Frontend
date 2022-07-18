@@ -1,6 +1,6 @@
-import AddChildForm from "../../components/AddChildForm";
+// import AddChildForm from "../../components/AddChildForm";
 import { MyChildFeed } from "../../components/MyChildFeed";
-import AddFeedForm from "../../components/AddFeed";
+// import AddFeedForm from "../../components/AddFeed";
 import { React, useEffect } from "react";
 import { getMyChildFeed } from "../../store/feed/thunks";
 import { selectorMyChildFeed } from "../../store/feed/selector";
@@ -23,14 +23,17 @@ export default function ParentsHomePage() {
       </div>
     );
   console.log(myFeeds, "page");
+
+  const myChildSortedFeeds = [...myFeeds].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
   return (
     <>
-      <AddChildForm />
-
       <h1 style={{ justifyContent: "center", textAlign: "center" }}>
         My Child
       </h1>
-      {myFeeds?.children?.map((f, index) => {
+      {myChildSortedFeeds?.map((f, index) => {
         return (
           <div style={{ display: "flex", direction: "column" }}>
             <MyChildFeed

@@ -5,6 +5,7 @@ import { React, useEffect } from "react";
 import { getallFeed } from "../../store/feed/thunks";
 import { selectorAllFeeds } from "../../store/feed/selector";
 import { useDispatch, useSelector } from "react-redux";
+import "../TeacherHomePage/styles.scss";
 
 export default function ParentsHomePage() {
   const dispatch = useDispatch();
@@ -14,6 +15,10 @@ export default function ParentsHomePage() {
     dispatch(getallFeed());
   }, [dispatch]);
 
+  const allSortedFeeds = [...feeds].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
   if (!feeds)
     return (
       <div>
@@ -22,12 +27,14 @@ export default function ParentsHomePage() {
     );
   return (
     <>
-      <AddChildForm />
-      <AddFeedForm />
+      <div className="forms">
+        <AddChildForm />
+        <AddFeedForm />
+      </div>
       <h1 style={{ justifyContent: "center", textAlign: "center" }}>
-        Teacher's Portal
+        <div className=""></div>{" "}
       </h1>
-      {feeds.map((f) => {
+      {allSortedFeeds.map((f) => {
         return (
           <AllFeed
             key={f.id}

@@ -6,10 +6,10 @@ import { setallChildren, newChildSucess } from "./slice";
 export const getallChildren = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(`${apiUrl}/child`);
-
+    console.log("GOT CHILD " + response.data);
     dispatch(setallChildren(response.data));
   } catch (error) {
-    console.log("error from getAllSpaces thunk: ", error.message);
+    console.log("error from getAllChildren thunk: ", error.message);
   }
 };
 

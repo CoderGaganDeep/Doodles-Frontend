@@ -23,14 +23,15 @@ export const Navigation = () => {
         <span />
       </Hamburger>
       <Menu open={open}>
-        <MenuLink href="/leaflet">About Us</MenuLink>
-        <MenuLink href="/leaflet">Our Services</MenuLink>
-        <MenuLink href="/styled">Our Teachers</MenuLink>
+        <MenuLink href="#welcome">About Us</MenuLink>
+        <MenuLink href="#about-us">Our Services</MenuLink>
+        <MenuLink href="#teacher">Our Teacher</MenuLink>
         {token ? (
           <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
         ) : (
-          <MenuLink href="/login">Login</MenuLink>
+          <MenuLink href="/login">Parent's Portal Login</MenuLink>
         )}
+
         {token ? (
           <MenuLink href="/parents">Parents</MenuLink>
         ) : (

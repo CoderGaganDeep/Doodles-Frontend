@@ -18,6 +18,7 @@ export default function AddChildForm() {
     dispatch(
       showMessageWithTimeout("success", true, "New Child Created!", 15000)
     );
+    setShowForm(false);
   };
   return showForm ? (
     <div className="formm">
@@ -62,7 +63,16 @@ export default function AddChildForm() {
           />
         </label>
         ​
-        <hr />​<button type="submit">Submit</button>
+        <hr />​
+        <button
+          className="button"
+          type="submit"
+          onClick={() => {
+            setShowForm(false);
+          }}
+        >
+          Submit
+        </button>
       </form>
     </div>
   ) : (

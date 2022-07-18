@@ -9,6 +9,7 @@ const MyChildFeed = (props, index) => {
     hour: "numeric",
     minute: "numeric",
   };
+  console.log(props);
   return (
     <div
       style={{ diplay: "flex", direction: "column" }}
