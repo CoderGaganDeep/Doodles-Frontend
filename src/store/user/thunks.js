@@ -5,15 +5,16 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
 
-export const signUp = (name, email, password) => {
+export const signUp = (name, email, password, isTeacher) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
-    console.log(name, email, password);
+    console.log(name, email, password, isTeacher);
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, {
         name,
         email,
         password,
+        isTeacher,
       });
 
       dispatch(

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../store/user/thunks";
-import { selectToken } from "../store/user/selectors";
+import { selectToken, selectUser } from "../store/user/selectors";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,10 +16,15 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (token !== null) {
-      navigate("/");
+      if (user.isTeacher) {
+        navigate("/teachers");
+      } else {
+        navigate("/parents");
+      }
     }
   }, [token, navigate]);
 
@@ -44,12 +49,6 @@ export const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />{" "}
-          {/* <Input
-            type="code"
-            placeholder="enter your specific code"
-            // value={code}
-            // onChange={(e) => setPassword(e.target.value)}
-          />{" "} */}
           <p>
             It is not allowed to multiply, distribute or publish in any way any
             photos from the Parent Portal, which also contain children other

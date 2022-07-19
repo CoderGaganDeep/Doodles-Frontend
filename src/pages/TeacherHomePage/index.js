@@ -6,10 +6,13 @@ import { getallFeed } from "../../store/feed/thunks";
 import { selectorAllFeeds } from "../../store/feed/selector";
 import { useDispatch, useSelector } from "react-redux";
 import "../TeacherHomePage/styles.scss";
+import { selectToken, selectUser } from "../../store/user/selectors";
 
 export default function ParentsHomePage() {
   const dispatch = useDispatch();
   const feeds = useSelector(selectorAllFeeds);
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(getallFeed());
@@ -28,25 +31,38 @@ export default function ParentsHomePage() {
   return (
     <>
       <div className="forms">
-        <AddChildForm />
-        <AddFeedForm />
+        {token && user && user.isTeacher ? (
+          <div className="forms">
+            <AddChildForm />
+            <AddFeedForm />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <h1 style={{ justifyContent: "center", textAlign: "center" }}>
         <div className=""></div>{" "}
       </h1>
       {allSortedFeeds.map((f) => {
         return (
-          <AllFeed
-            key={f.id}
-            id={f.id}
-            feed={f.feed}
-            imageUrl={f.imageUrl}
-            createdAt={f.createdAt}
-            updatedAt={f.updatedAt}
-            childId={f.childId}
-            teacherId={f.teacherId}
-            showLink={true}
-          />
+          <div>
+            {/* works only if user is logged in as teacher*/}
+            {!token || !user || !user.isTeacher ? (
+              ""
+            ) : (
+              <AllFeed
+                key={f.id}
+                id={f.id}
+                feed={f.feed}
+                imageUrl={f.imageUrl}
+                createdAt={f.createdAt}
+                updatedAt={f.updatedAt}
+                childId={f.childId}
+                teacherId={f.teacherId}
+                showLink={true}
+              />
+            )}
+          </div>
         );
       })}
     </>

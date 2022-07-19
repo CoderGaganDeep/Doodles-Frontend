@@ -5,7 +5,8 @@ import { showMessageWithTimeout } from "../../store/appState/thunks";
 import { setNewFeed } from "../../store/feed/thunks";
 import { Title } from "../../styled/Title";
 import { Image } from "../../styled/Image";
-// import { Button } from "../../styled/Button";
+import { Input } from "../../styled/Input";
+import { Button } from "../../styled/Button";
 import { getallFeed } from "../../store/feed/thunks";
 import { getallChildren } from "../../store/child/thunks";
 import { selectorAllChildren } from "../../store/child/selectors";
@@ -64,7 +65,7 @@ export default function AddFeedForm() {
     <div className="formm">
       <form onSubmit={handleSubmit}>
         <label>What would you like to share?</label>
-        <input
+        <Input
           className="form-i"
           type="text"
           name="Feed"
@@ -121,17 +122,17 @@ export default function AddFeedForm() {
             />
           );
         })}{" "}
-        <hr />​ ​<button type="submit">Submit</button>
+        <hr />​ ​<Button type="submit">Submit</Button>
       </form>
     </div>
   ) : (
-    <button
+    <Button
       className="button"
       onClick={() => {
         setShowForm(true);
       }}
     >
       Write New Journal
-    </button>
+    </Button>
   );
 }

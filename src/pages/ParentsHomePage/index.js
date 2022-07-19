@@ -5,6 +5,7 @@ import { React, useEffect } from "react";
 import { getMyChildFeed } from "../../store/feed/thunks";
 import { selectorMyChildFeed } from "../../store/feed/selector";
 import { useDispatch, useSelector } from "react-redux";
+import { Image } from "../../styled/Image";
 
 export default function ParentsHomePage() {
   const dispatch = useDispatch();
@@ -30,25 +31,20 @@ export default function ParentsHomePage() {
 
   return (
     <>
-      <h1 style={{ justifyContent: "center", textAlign: "center" }}>
-        My Child
-      </h1>
       {myChildSortedFeeds?.map((f, index) => {
         return (
-          <div style={{ display: "flex", direction: "column" }}>
-            <MyChildFeed
-              key={f.id}
-              name={f.name}
-              feed={f.feeds}
-              avatar={f.avatar}
-              imageUrl={f.imageUrl}
-              createdAt={f.createdAt}
-              updatedAt={f.updatedAt}
-              childId={f.childId}
-              teacherId={f.teacherId}
-              showLink={true}
-            />
-          </div>
+          <MyChildFeed
+            key={f.id}
+            name={f.name}
+            feed={f.feeds}
+            avatar={f.avatar}
+            imageUrl={f.imageUrl}
+            createdAt={f.createdAt}
+            updatedAt={f.updatedAt}
+            childId={f.childId}
+            teacherId={f.teacherId}
+            showLink={true}
+          />
         );
       })}
     </>

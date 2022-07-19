@@ -9,6 +9,8 @@ import { selectToken } from "../store/user/selectors";
 export const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isTeacher, setisTeacher] = useState("false");
+
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -22,9 +24,13 @@ export const SignUp = () => {
     }
   }, [token, navigate]);
 
+  const handleChange = (event) => {
+    setisTeacher(event.target.checked);
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, isTeacher));
   };
 
   return (
@@ -49,6 +55,9 @@ export const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
+          <label>Teacher</label>
+          <Input type="checkbox" value={isTeacher} onChange={handleChange} />
+
           <p>
             It is not allowed to multiply, distribute or publish in any way any
             photos from the Parent Portal, which also contain children other

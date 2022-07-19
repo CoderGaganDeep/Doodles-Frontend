@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { showMessageWithTimeout } from "../../store/appState/thunks";
 import { setNewChild } from "../../store/child/thunks";
+import { Button } from "../../styled/Button";
 
 export default function AddChildForm() {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export default function AddChildForm() {
         </label>
         ​
         <hr />​
-        <button
+        <Button
           className="button"
           type="submit"
           onClick={() => {
@@ -72,18 +73,18 @@ export default function AddChildForm() {
           }}
         >
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   ) : (
-    <button
+    <Button
       className="button"
       onClick={() => {
         setShowForm(true);
       }}
     >
       Add New Child
-    </button>
+    </Button>
   );
 }
 

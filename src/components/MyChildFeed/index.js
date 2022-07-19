@@ -1,4 +1,6 @@
 import React from "react";
+import { Image } from "../../styled/Image";
+import { FeedContainer } from "../../styled/FeedContainer";
 
 const MyChildFeed = (props, index) => {
   var setdate = {
@@ -18,16 +20,17 @@ const MyChildFeed = (props, index) => {
     >
       {props?.feed?.map((item, index) => {
         return (
-          <div>
+          <FeedContainer>
             <p key={index}>
-              Feed:{item.id},{item.feed},{" "}
-              <span style={{ fontSize: "12px", color: "red" }}>
+              {item.feed},{" "}
+              <span style={{ color: "orange", justifyItems: "end" }}>
                 {" "}
                 {new Date(props.createdAt).toLocaleDateString("en-US", setdate)}
               </span>
+              <br />
             </p>
-            <img style={{ width: "auto" }} src={item.imageUrl} alt="" />
-          </div>
+            <Image src={item.imageUrl} alt="" />
+          </FeedContainer>
         );
       })}
       {/* <img src={props.imageUrl} alt="" />

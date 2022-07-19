@@ -1,6 +1,7 @@
 import React from "react";
 import "../AllFeed/styles.scss";
 import { Image } from "../../styled/Image";
+import { FeedContainer } from "../../styled/FeedContainer";
 
 const AllFeed = (props) => {
   var setdate = {
@@ -14,17 +15,19 @@ const AllFeed = (props) => {
 
   return (
     <div className="spaceholder-h">
-      <div>
-        <span style={{ fontSize: "12px", color: "black" }}>
+      <FeedContainer>
+        <span>
           <p>
-            {new Date(props.createdAt).toLocaleDateString("en-US", setdate)}
+            {props.feed},{" "}
+            <span style={{ color: "orange", justifyItems: "end" }}>
+              {new Date(props.createdAt).toLocaleDateString("en-US", setdate)}
+            </span>
+            {/* <p>Child:{props.childId} </p> */}
           </p>
-
-          <p>Feed:{props.feed}</p>
-          {/* <p>Child:{props.childId} </p> */}
         </span>
-      </div>
-      <img src={props.imageUrl} alt="" />
+
+        <Image src={props.imageUrl} alt="" />
+      </FeedContainer>
       {/* <p>Teacher{props.teacherId} </p> */}
       {/* <img src={props.imageUrl} alt="" /> */}
       {/* <span>Time:{props.updatedAt} </span> */}

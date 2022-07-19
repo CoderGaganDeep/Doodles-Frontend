@@ -1,46 +1,123 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectToken } from "../store/user/selectors";
+import { selectUser, selectToken } from "../store/user/selectors";
+import { useNavigate } from "react-router-dom";
 import { logOut } from "../store/user/slice";
-import ParentsHomePage from "../pages/ParentsHomePage";
 
 export const Navigation = () => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const token = useSelector(selectToken);
-  //ee8c3a
+
+  const user = useSelector(selectUser);
+
+  function logmeOut() {
+    dispatch(logOut());
+    navigate("/");
+  }
+
   return (
     <Nav>
       <Logo href="/">
-        Doodles<span> </span>
+        Doodles<span> Play School</span>
       </Logo>
-      <Hamburger onClick={() => setOpen(!open)}>
+      {/* <Hamburger onClick={() => setOpen(!open)}>
         <span />
-        <span />
-        <span />
-      </Hamburger>
-      <Menu open={open}>
-        <MenuLink href="#welcome">About Us</MenuLink>
-        <MenuLink href="#about-us">Our Services</MenuLink>
-        <MenuLink href="#teacher">Our Teacher</MenuLink>
-        {token ? (
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-        ) : (
-          <MenuLink href="/login">Parent's Portal Login</MenuLink>
-        )}
+      </Hamburger> */}
 
-        {token ? (
+      <Menu open={open}>
+        {/* {!token || !user || !user.isTeacher? (
+          <MenuLink>
+            <MenuLink href="#welcome">About Us</MenuLink>
+            <MenuLink href="#about-us">Our Services</MenuLink>
+            <MenuLink href="#teacher">Our Teacher</MenuLink>
+            <MenuLink href="/login"> Login Portal</MenuLink>
+          </MenuLink>
+        ) : (
+          <MenuLink>
+            {" "}
+            <MenuLink href="/parents">Parents</MenuLink>
+            <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+          </MenuLink>
+        ): (  <MenuLink>
+          {" "}
+          <MenuLink href="/teachers">Teachers</MenuLink>
+          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+        </MenuLink>)
+        
+        
+        
+        }
+
+        ; */}
+        {/* 
+        {!token && !user.isTeacher ? (
+          <span className="bg-green-100">
+            <MenuLink>
+              <MenuLink href="#welcome">About Us</MenuLink>
+              <MenuLink href="#about-us">Our Services</MenuLink>
+              <MenuLink href="#teacher">Our Teacher</MenuLink>
+              <MenuLink href="/login"> Login Portal</MenuLink>
+                <MenuLink href="/parents">Parents</MenuLink>
+              <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+            </MenuLink>
+          </span>
+        ) : !user.isTeacher ? (
+          <span className="bg-teal-100">
+            <MenuLink>
+              {" "}
+            
+            </MenuLink>
+          </span>
+        ) : (
+          <span className="bg-red-100">
+            <MenuLink>
+              {" "}
+              <MenuLink href="/teachers">Teachers</MenuLink>
+              <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
+            </MenuLink>
+          </span>
+        )} */}
+        {/* {token && !user.isTeacher ? (
           <MenuLink href="/parents">Parents</MenuLink>
         ) : (
-          <MenuLink href="/login"></MenuLink>
-        )}
+          <MenuLink href="/teachers">Teachers</MenuLink>
+        )} */}
+        {/* {token ? (
+          <MenuLink href="/parents">Parents</MenuLink>
+        ) : (
+          <MenuLink>
+            <MenuLink href="#welcome">About Us</MenuLink>
+            <MenuLink href="#about-us">Our Services</MenuLink>
+            <MenuLink href="#teacher">Our Teacher</MenuLink>
+          </MenuLink>
+        )} */}
+
         {token ? (
+          <MenuLink onClick={() => logmeOut()}>Logout</MenuLink>
+        ) : (
+          <MenuLink>
+            <MenuLink href="/login">Portal Login</MenuLink>
+            <MenuLink href="/#welcome">About Us</MenuLink>
+            <MenuLink href="/#about-us">Our Services</MenuLink>
+            <MenuLink href="/#teacher">Our Teacher</MenuLink>
+          </MenuLink>
+        )}
+
+        {token && user && user.isTeacher ? (
           <MenuLink href="/teachers">Teachers</MenuLink>
         ) : (
-          <MenuLink href="/login"></MenuLink>
+          ""
+        )}
+
+        {token && user && !user.isTeacher ? (
+          <MenuLink href="/parents">Parents</MenuLink>
+        ) : (
+          ""
         )}
       </Menu>
     </Nav>

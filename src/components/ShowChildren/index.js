@@ -14,7 +14,7 @@ const ShowChildren = (props) => {
   return (
     <div key={props.id}>
       <label>
-        <Input type="checkbox" checked={checked} onChange={handleChange} />
+        <Input type="radio" checked={checked} onChange={handleChange} />
         {props.name}
       </label>
 
