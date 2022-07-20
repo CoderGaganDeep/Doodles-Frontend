@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../TeacherHomePage/styles.scss";
 import { selectToken, selectUser } from "../../store/user/selectors";
 
-export default function ParentsHomePage() {
+export default function TeacherHomePage() {
   const dispatch = useDispatch();
   const feeds = useSelector(selectorAllFeeds);
   const token = useSelector(selectToken);
@@ -17,10 +17,6 @@ export default function ParentsHomePage() {
   useEffect(() => {
     dispatch(getallFeed());
   }, [dispatch]);
-
-  const allSortedFeeds = [...feeds].sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
 
   if (!feeds)
     return (
@@ -43,9 +39,9 @@ export default function ParentsHomePage() {
       <h1 style={{ justifyContent: "center", textAlign: "center" }}>
         <div className=""></div>{" "}
       </h1>
-      {allSortedFeeds.map((f) => {
+      {feeds.map((f) => {
         return (
-          <div>
+          <div key={f.id}>
             {/* works only if user is logged in as teacher*/}
             {!token || !user || !user.isTeacher ? (
               ""

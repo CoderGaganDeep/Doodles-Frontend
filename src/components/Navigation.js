@@ -30,81 +30,15 @@ export const Navigation = () => {
       </Hamburger> */}
 
       <Menu open={open}>
-        {/* {!token || !user || !user.isTeacher? (
-          <MenuLink>
-            <MenuLink href="#welcome">About Us</MenuLink>
-            <MenuLink href="#about-us">Our Services</MenuLink>
-            <MenuLink href="#teacher">Our Teacher</MenuLink>
-            <MenuLink href="/login"> Login Portal</MenuLink>
-          </MenuLink>
-        ) : (
-          <MenuLink>
-            {" "}
-            <MenuLink href="/parents">Parents</MenuLink>
-            <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-          </MenuLink>
-        ): (  <MenuLink>
-          {" "}
-          <MenuLink href="/teachers">Teachers</MenuLink>
-          <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-        </MenuLink>)
-        
-        
-        
-        }
-
-        ; */}
-        {/* 
-        {!token && !user.isTeacher ? (
-          <span className="bg-green-100">
-            <MenuLink>
-              <MenuLink href="#welcome">About Us</MenuLink>
-              <MenuLink href="#about-us">Our Services</MenuLink>
-              <MenuLink href="#teacher">Our Teacher</MenuLink>
-              <MenuLink href="/login"> Login Portal</MenuLink>
-                <MenuLink href="/parents">Parents</MenuLink>
-              <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-            </MenuLink>
-          </span>
-        ) : !user.isTeacher ? (
-          <span className="bg-teal-100">
-            <MenuLink>
-              {" "}
-            
-            </MenuLink>
-          </span>
-        ) : (
-          <span className="bg-red-100">
-            <MenuLink>
-              {" "}
-              <MenuLink href="/teachers">Teachers</MenuLink>
-              <MenuLink onClick={() => dispatch(logOut())}>Logout</MenuLink>
-            </MenuLink>
-          </span>
-        )} */}
-        {/* {token && !user.isTeacher ? (
-          <MenuLink href="/parents">Parents</MenuLink>
-        ) : (
-          <MenuLink href="/teachers">Teachers</MenuLink>
-        )} */}
-        {/* {token ? (
-          <MenuLink href="/parents">Parents</MenuLink>
-        ) : (
-          <MenuLink>
-            <MenuLink href="#welcome">About Us</MenuLink>
-            <MenuLink href="#about-us">Our Services</MenuLink>
-            <MenuLink href="#teacher">Our Teacher</MenuLink>
-          </MenuLink>
-        )} */}
-
         {token ? (
           <MenuLink onClick={() => logmeOut()}>Logout</MenuLink>
         ) : (
           <MenuLink>
-            <MenuLink href="/login">Portal Login</MenuLink>
+            <MenuLink href="/">Home</MenuLink>
             <MenuLink href="/#welcome">About Us</MenuLink>
             <MenuLink href="/#about-us">Our Services</MenuLink>
             <MenuLink href="/#teacher">Our Teacher</MenuLink>
+            <MenuLink href="/login">Portal Login</MenuLink>
           </MenuLink>
         )}
 

@@ -10,7 +10,6 @@ import { Button } from "../../styled/Button";
 import { getallFeed } from "../../store/feed/thunks";
 import { getallChildren } from "../../store/child/thunks";
 import { selectorAllChildren } from "../../store/child/selectors";
-import { ShowChildren } from "../ShowChildren/index";
 
 export default function AddFeedForm() {
   const dispatch = useDispatch();
@@ -19,6 +18,10 @@ export default function AddFeedForm() {
   const [childId, setChildId] = useState("");
   const [showForm, setShowForm] = useState(false);
   const allChildren = useSelector(selectorAllChildren);
+
+  function childSelected(event) {
+    setChildId(event.target.value);
+  }
 
   useEffect(() => {
     dispatch(getallChildren());
@@ -101,7 +104,7 @@ export default function AddFeedForm() {
             )}
           </div>
         </div>
-        <label>Tag Children: </label>
+        <label>Tag Child: </label>
         {/* <input
             className="form-i"
             type="text"
@@ -109,17 +112,18 @@ export default function AddFeedForm() {
             value={childId}
             onChange={(event) => setChildId(event.target.value)}
           /> */}
-        {allChildren.map((tag) => {
+        {allChildren.map((child) => {
           return (
-            <ShowChildren
-              key={tag.id}
-              id={tag.id}
-              name={tag.name}
-              // age={tag.age}
-              // branch={tag.branch}
-              // userId={tag.userId}
-              showLink={true}
-            />
+            <div key={child.id}>
+              <Input
+                type="radio"
+                //checked={checked}
+                onClick={childSelected}
+                name="children"
+                value={child.id}
+              />
+              {child.name}
+            </div>
           );
         })}{" "}
         <hr />​ ​<Button type="submit">Submit</Button>

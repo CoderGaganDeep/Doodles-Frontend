@@ -11,7 +11,10 @@ export const feedSlice = createSlice({
   initialState,
   reducers: {
     setallFeed: (state, action) => {
-      state.allFeeds = action.payload;
+      const allSortedFeeds = [...action.payload].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+      state.allFeeds = allSortedFeeds;
     },
     newFeedSucess: (state, action) => {
       state.feedDetails = action.payload;
