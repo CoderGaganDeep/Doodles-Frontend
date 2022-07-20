@@ -35,7 +35,6 @@ export default function AddFeedForm() {
     );
     setShowForm(false);
     dispatch(getallFeed());
-    dispatch(getallChildren());
   };
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -105,27 +104,11 @@ export default function AddFeedForm() {
           </div>
         </div>
         <label>Tag Child: </label>
-        {/* <input
-            className="form-i"
-            type="text"
-            name="ChildId"
-            value={childId}
-            onChange={(event) => setChildId(event.target.value)}
-          /> */}
-        {allChildren.map((child) => {
-          return (
-            <div key={child.id}>
-              <Input
-                type="radio"
-                //checked={checked}
-                onClick={childSelected}
-                name="children"
-                value={child.id}
-              />
-              {child.name}
-            </div>
-          );
-        })}{" "}
+        <select value={childId} onChange={childSelected}>
+          {allChildren.map((option) => (
+            <option value={option.id}>{option.name}</option>
+          ))}
+        </select>
         <hr />​ ​<Button type="submit">Submit</Button>
       </form>
     </div>

@@ -1,9 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { showMessageWithTimeout } from "../../store/appState/thunks";
 import { setNewChild } from "../../store/child/thunks";
 import { Button } from "../../styled/Button";
+import { getallChildren } from "../../store/child/thunks";
 
 export default function AddChildForm() {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ export default function AddChildForm() {
   const [branch, setBranch] = useState("Amsterdam");
   const [group, setGroup] = useState("");
   const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    dispatch(getallChildren());
+  }, [dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -69,7 +74,7 @@ export default function AddChildForm() {
           className="button"
           type="submit"
           onClick={() => {
-            setShowForm(false);
+            handleSubmit();
           }}
         >
           Submit
