@@ -43,21 +43,23 @@ export const SignUp = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <br />
           <Input
             placeholder="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
+          />{" "}
+          <br />
           <Input
             type="password"
             placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <br />
-          <label>Teacher</label>
-          <Input type="checkbox" value={isTeacher} onChange={handleChange} />
-
+          <br /> <br />
+          <input type="checkbox" value={isTeacher} onChange={handleChange} />
+          <label> I am a Teacher </label>
+          <br /> <br />
           <p>
             It is not allowed to multiply, distribute or publish in any way any
             photos from the Parent Portal, which also contain children other

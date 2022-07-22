@@ -16,8 +16,18 @@ export default function AddFeedForm() {
   const [feed, setFeed] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [childId, setChildId] = useState("");
-  const [showForm, setShowForm] = useState(false);
+
   const allChildren = useSelector(selectorAllChildren);
+
+  // const [open1, setOpen1] = React.useState(false);
+
+  // const handleClickToOpen1 = () => {
+  //   setOpen1(true);
+  // };
+
+  // const handleToClose1 = () => {
+  //   setOpen1(false);
+  // };
 
   function childSelected(event) {
     setChildId(event.target.value);
@@ -33,8 +43,9 @@ export default function AddFeedForm() {
     dispatch(
       showMessageWithTimeout("success", true, "New Feed Created!", 15000)
     );
-    setShowForm(false);
+
     dispatch(getallFeed());
+    window.location.reload(false);
   };
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -63,38 +74,42 @@ export default function AddFeedForm() {
         </div>
       );
   };
-  return showForm ? (
-    <div className="formm">
+  return (
+    <div
+      className="formm"
+      style={{
+        display: "block",
+        justifyContent: "center",
+        paddingLeft: "30px",
+        paddingRight: "40px",
+      }}
+    >
       <form onSubmit={handleSubmit}>
-        <label>What would you like to share?</label>
+        <h1 style={{ paddingBlock: "30px" }}>Add New Journal</h1>
+        <label>What would you like to share today?</label>
         <Input
           className="form-i"
           type="text"
           name="Feed"
           value={feed}
           onChange={(event) => setFeed(event.target.value)}
+          style={{ paddingBlock: "30px" }}
         />
-        <label>
-          Add Photos:
-          {/* <input
-            className="form-i"
-            type="text"
-            name="imageUrl"
-            value={imageUrl}
-            onChange={(event) => setImageUrl(event.target.value)}
-          /> */}
-        </label>
-        <div style={{ textAlign: "center" }}>
-          <br />
-          <input type="file" onChange={uploadImage} />
-
+        <div style={{ paddingBlock: "30px" }}>
+          <label>Add Photos:</label>
+          <div style={{ textAlign: "center" }}>
+            <br />
+            <input type="file" onChange={uploadImage} />
+          </div>
           <div>
-            <Image
+            <img
               src={
                 imageUrl
                   ? imageUrl
                   : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
               }
+              alt=""
+              style={{ width: "70%", alignContent: "center" }}
             />
             {imageUrl ? (
               <Title style={{ fontSize: 20 }}>Succesfully uploaded!</Title>
@@ -103,23 +118,18 @@ export default function AddFeedForm() {
             )}
           </div>
         </div>
-        <label>Tag Child: </label>
-        <select value={childId} onChange={childSelected}>
-          {allChildren.map((option) => (
-            <option value={option.id}>{option.name}</option>
-          ))}
-        </select>
+        <div style={{ paddingBlock: "30px" }}>
+          <label>Tag Child: </label>
+          <select value={childId} onChange={childSelected}>
+            {allChildren.map((option) => (
+              <option value={option.id} key={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <hr />​ ​<Button type="submit">Submit</Button>
       </form>
     </div>
-  ) : (
-    <Button
-      className="button"
-      onClick={() => {
-        setShowForm(true);
-      }}
-    >
-      Write New Journal
-    </Button>
   );
 }

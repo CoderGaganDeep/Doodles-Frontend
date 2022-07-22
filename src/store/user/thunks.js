@@ -3,7 +3,7 @@ import axios from "axios";
 import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
-import { loginSuccess, logOut, tokenStillValid } from "./slice";
+import { loginSuccess, logOut, tokenStillValid, setallUsers } from "./slice";
 
 export const signUp = (name, email, password, isTeacher) => {
   return async (dispatch, getState) => {
@@ -85,6 +85,16 @@ export const login = (email, password) => {
       dispatch(appDoneLoading());
     }
   };
+};
+
+export const getallUsers = () => async (dispatch, getState) => {
+  try {
+    const response = await axios.get(`${apiUrl}/user`);
+    console.log("GOT USERS " + response.data);
+    dispatch(setallUsers(response.data));
+  } catch (error) {
+    console.log("error from getallUsers thunk: ", error.message);
+  }
 };
 
 export const getUserWithStoredToken = () => {

@@ -1,10 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { showMessageWithTimeout } from "../../store/appState/thunks";
 import { setNewChild } from "../../store/child/thunks";
 import { Button } from "../../styled/Button";
 import { getallChildren } from "../../store/child/thunks";
+import { getallUsers } from "../../store/user/thunks";
+import { selectorAllUsers } from "../../store/user/selectors";
 
 export default function AddChildForm() {
   const dispatch = useDispatch();
@@ -12,25 +14,34 @@ export default function AddChildForm() {
   const [age, setAge] = useState("");
   const [branch, setBranch] = useState("Amsterdam");
   const [group, setGroup] = useState("");
-  const [showForm, setShowForm] = useState(false);
+  const [userId, setuserId] = useState("");
+  //  const [showForm, setShowForm] = useState(false);
+
+  const allUsers = useSelector(selectorAllUsers);
 
   useEffect(() => {
     dispatch(getallChildren());
+    dispatch(getallUsers());
   }, [dispatch]);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(setNewChild(name, age, branch, group));
+    //event.preventDefault();
+    console.log("SAVING USERID : " + userId);
+    dispatch(setNewChild(name, age, branch, group, userId));
     dispatch(
       showMessageWithTimeout("success", true, "New Child Created!", 15000)
     );
-    setShowForm(false);
+    window.location.reload(false);
+    //setShowForm(false);
   };
-  return showForm ? (
-    <div className="formm">
-      <form onSubmit={handleSubmit}>
-        <h1>Add My Children</h1>
-        <label> Name of Child:</label>
+  return (
+    <div
+      className="formm"
+      style={{ paddingLeft: "100px", paddingRight: "120px" }}
+    >
+      <form>
+        <h1 style={{ paddingBlock: "30px" }}>Add New Student</h1>
+        <label> Name:</label>
         <input
           className="form-i"
           type="text"
@@ -38,8 +49,9 @@ export default function AddChildForm() {
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
+        <br />
         <label>
-          Age of Child:
+          Age:
           <input
             className="form-i"
             type="text"
@@ -47,6 +59,7 @@ export default function AddChildForm() {
             value={age}
             onChange={(event) => setAge(event.target.value)}
           />
+          <br />
         </label>
         <label>
           Branch Name:
@@ -58,6 +71,7 @@ export default function AddChildForm() {
             onChange={(event) => setBranch(event.target.value)}
           />
         </label>
+        <br />
         <label>
           Current Group:
           <input
@@ -68,6 +82,29 @@ export default function AddChildForm() {
             onChange={(event) => setGroup(event.target.value)}
           />
         </label>
+        {/* <label>
+          Parent ID:
+          <input
+            className="form-i"
+            type="text"
+            name="UserId"
+            value={userId}
+            onChange={(event) => setuserId(event.target.value)}
+          />
+        </label> */}
+        <div style={{ paddingBlock: "30px" }}>
+          <label>Choose Parent: </label>
+          <select
+            value={userId}
+            onChange={(event) => setuserId(event.target.value)}
+          >
+            {allUsers.map((option) => (
+              <option value={option.id} key={option.id}>
+                {option.name}
+              </option>
+            ))}
+          </select>
+        </div>
         ​
         <hr />​
         <Button
@@ -81,14 +118,5 @@ export default function AddChildForm() {
         </Button>
       </form>
     </div>
-  ) : (
-    <Button
-      className="button"
-      onClick={() => {
-        setShowForm(true);
-      }}
-    >
-      Add New Child
-    </Button>
   );
 }

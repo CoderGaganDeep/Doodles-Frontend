@@ -5,7 +5,7 @@ export const Image = styled.img`
   margin-left: auto;
   margin-right: auto;
 
-  width: 250px;
+  width: 550px;
   margin-top: 10px;
   padding: 10px;
   border-radius: 1.5em;

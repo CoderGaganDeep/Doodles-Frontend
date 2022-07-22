@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
+    document.title = "Doodles";
   }, [dispatch]);
 
   return (

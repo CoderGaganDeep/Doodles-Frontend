@@ -15,16 +15,16 @@ export const getallChildren = () => async (dispatch, getState) => {
 
 //2. write a thunk to submit new child form
 export const setNewChild =
-  (name, age, branch, group) => async (dispatch, getState) => {
+  (name, age, branch, group, userId) => async (dispatch, getState) => {
     try {
       // const token = getState().user.token;
       const response = await axios.post(
         `${apiUrl}/child`,
-        { name, age, branch, group }
+        { name, age, branch, group, userId }
 
         // { headers: { Authorization: `Bearer ${token}` } }
       );
-      console.log(name, age, branch, group);
+      console.log(name, age, branch, group, userId);
 
       dispatch(newChildSucess(response.data));
     } catch (error) {
