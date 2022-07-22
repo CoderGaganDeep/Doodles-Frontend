@@ -3,16 +3,18 @@ import axios from "axios";
 import { selectToken } from "./selectors";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/thunks";
-import { loginSuccess, logOut, tokenStillValid } from "./slice";
+import { loginSuccess, logOut, tokenStillValid, setallUsers } from "./slice";
 
-export const signUp = (name, email, password) => {
+export const signUp = (name, email, password, isTeacher) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
+    console.log(name, email, password, isTeacher);
     try {
       const response = await axios.post(`${apiUrl}/auth/signup`, {
         name,
         email,
         password,
+        isTeacher,
       });
 
       dispatch(
@@ -22,7 +24,8 @@ export const signUp = (name, email, password) => {
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data.message);
+        console.log(error.response);
+        // console.log(error.response.data.message);
         dispatch(
           setMessage({
             variant: "danger",
@@ -82,6 +85,16 @@ export const login = (email, password) => {
       dispatch(appDoneLoading());
     }
   };
+};
+
+export const getallUsers = () => async (dispatch, getState) => {
+  try {
+    const response = await axios.get(`${apiUrl}/user`);
+    console.log("GOT USERS " + response.data);
+    dispatch(setallUsers(response.data));
+  } catch (error) {
+    console.log("error from getallUsers thunk: ", error.message);
+  }
 };
 
 export const getUserWithStoredToken = () => {
